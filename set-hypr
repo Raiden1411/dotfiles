@@ -75,9 +75,6 @@ cp -R ~/.config/HyprV/wofi/ ~/.config/
 cp -R ~/.config/HyprV/bat/ ~/.config/
 cp -R ~/.config/HyprV/starship/starship.toml ~/.config/
 cp -R ~/.config/HyprV/lvim/ ~/.config/
-cp -R ~/.config/HyprV/.oh-my-zsh/ ~/
-cp -R ~/.config/HyprV/zsh/ ~/
-cp -R ~/.config/HyprV/lvim/ ~/
 cp -R ~/.config/HyprV/.tmux/ ~/
 cp -R ~/.config/HyprV/.zsh/ ~/
 cp ~/.config/HyprV/.tmux.conf ~/
