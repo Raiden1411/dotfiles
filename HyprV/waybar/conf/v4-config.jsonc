@@ -88,7 +88,7 @@
         "max-length": 10,
         "format-alt-click": "click-right",
         "format-alt": " {usage}%",
-        "on-click": "alacritty --title btop -e sh -c 'btop'"
+        "on-click": "kitty --start-as=fullscreen --title btop sh -c 'btop'"
     },
 
     "battery": {

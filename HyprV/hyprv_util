@@ -9,9 +9,11 @@ get_theme() {
     if [[ $THEMEIS == "dark.css" ]]; then
         SWITCHTO="-dark"
         MODESTR="Dark"
+        CAT="Mocha"
     else
         SWITCHTO=""
         MODESTR="Light"
+        CAT="Latte"
     fi
 }
 
@@ -21,12 +23,12 @@ update_theme() {
         xfconf-query -c xsettings -p /Net/IconThemeName -s "Papirus-Dark"
         gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
     else 
-        xfconf-query -c xsettings -p /Net/IconThemeName -s "Catpuccin-Mocha"
-        gsettings set org.gnome.desktop.interface icon-theme "Catpuccin-Mocha"
+        xfconf-query -c xsettings -p /Net/IconThemeName -s "Catppuccin-$CAT-Standart-Mauve-$MODESTR"
+        gsettings set org.gnome.desktop.interface icon-theme "Catppuccin-$CAT-Standart-Mauve-$MODESTR"
     fi
 
-    xfconf-query -c xsettings -p /Net/ThemeName -s "Catpuccin-Mocha"
-    gsettings set org.gnome.desktop.interface gtk-theme "Catpuccin-Mocha"
+    xfconf-query -c xsettings -p /Net/ThemeName -s "Catppuccin-$CAT-Standart-Mauve-$MODESTR"
+    gsettings set org.gnome.desktop.interface gtk-theme "Catppuccin-$CAT-Standart-Mauve-$MODESTR"
 }
 
 get_ver() {
@@ -131,8 +133,8 @@ fi
 get_ver
 
 TOOLTIP='Default Keybinds\n'\
-'SUPER + ENTER = Start Alacritty\n'\
-'SUPER + Q = Close Window\n'\
+'SUPER + Q = Start Kitty\n'\
+'SUPER + F4 = Close Window\n'\
 'SUPER + L = Lock Screen\n'\
 'SUPER + M = Logout menu\n'\
 'SUPER + E = File Manager\n'\

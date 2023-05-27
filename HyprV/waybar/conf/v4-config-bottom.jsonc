@@ -10,11 +10,9 @@
         "custom/launch_wofi",
         "custom/launch_firefox",
         "custom/launch_thunderbird",
-        "custom/launch_alacritty",
+        "custom/launch_kitty",
         "custom/launch_thunar"
     ],
-    "modules-center": ["wlr/taskbar"],
-    "modules-right": ["custom/weather"],
 
     "include": [
         "~/.config/HyprV/waybar/conf/mesu.jsonc"
@@ -32,9 +30,9 @@
         "tooltip": false
     },
 
-    "custom/launch_alacritty": {
+    "custom/launch_kitty": {
         "format": "",
-        "on-click": "exec alacritty",
+        "on-click": "exec kitty",
         "tooltip": false
     },
     

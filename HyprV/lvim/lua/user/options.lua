@@ -50,5 +50,5 @@ lvim.builtin.alpha.active = true
 lvim.builtin.alpha.mode = "dashboard"
 
 lvim.builtin.terminal.open_mapping = "<F7>"
-lvim.lsp.diagnostics.update_in_insert = true
+vim.diagnostic.config({ update_in_insert = true })
 

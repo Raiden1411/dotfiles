@@ -1,3 +1,5 @@
+vim.opt.shell = "/bin/sh"
+
 reload('user.plugins')
 reload('user.colorscheme')
 reload('user.options')

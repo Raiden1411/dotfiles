@@ -10,7 +10,6 @@ $git_status\
 $nodejs\
 $rust\
 $golang\
-$php\
 [](fg:#212736 bg:#1d2230)\
 $time\
 [ ](fg:#1d2230)\
@@ -83,6 +82,11 @@ style = "yellow"
 success_symbol = "[❯](purple)"
 error_symbol = "[❯](red)"
 vicmd_symbol = "[❮](green)"
+
+[shell]
+fish_indicator = ''
+style = 'cyan bold'
+disabled = false
 
 [git_metrics]
 disabled = false

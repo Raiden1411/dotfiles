@@ -43,12 +43,6 @@ lvim.plugins = {
   { "tpope/vim-eunuch" },
   { "tpope/vim-repeat" },
   {
-    "windwp/nvim-ts-autotag",
-    config = function()
-      require("nvim-ts-autotag").setup()
-    end,
-  },
-  {
     "phaazon/hop.nvim",
     branch = "v2",
     config = function()
