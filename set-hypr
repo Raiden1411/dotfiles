@@ -1,0 +1,120 @@
+#!/bin/bash
+
+# clear the screen
+clear
+
+### Disable wifi powersave mode ###
+
+echo -e "[connection]\nwifi.powersave = 2" | sudo tee -a /etc/NetworkManager/conf.d/wifi-powersave.conf 
+
+sudo systemctl restart NetworkManager 
+    
+    #wait for services to restore (looking at you DNS)
+
+sleep 6
+echo -e "NetworkManager restart completed."
+
+git clone https://aur.archlinux.org/paru-bin.git
+cd paru-bin
+makepkg -si --noconfirm 
+
+paru -Syu --noconfirm
+#PREP
+paru -S qt5-wayland qt5ct qt6-wayland qt6ct gtk3 polkit-gnome pipewire wireplumber jq gcc12 wl-clipboard cliphist python-requests pacman-contrib --noconfirm
+
+paru -S linux-headers nvidia-dkms nvidia-settings libva libva-nvidia-driver-git --noconfirm
+
+sudo sed -i 's/MODULES=()/MODULES=(nvidia nvidia_modeset nvidia_uvm nvidia_drm)/' /etc/mkinitcpio.conf
+sudo mkinitcpio --config /etc/mkinitcpio.conf --generate /boot/initramfs-custom.img
+echo -e "options nvidia-drm modeset=1" | sudo tee -a /etc/modprobe.d/nvidia.conf
+    
+paru -S hyprland-nvidia-git --noconfirm
+
+#fix needed for waybar-hyprland
+export CC=gcc-12 CXX=g++-12
+
+# Stage 1 - main components
+echo -e "Installing main components, this may take a while..."
+
+paru -S alacritty mako waybar-hyprland swww swaylock-effects wofi wlogout xdg-desktop-portal-hyprland swappy grim slurp thunar btop firefox mpv pamixer pavucontrol brightnessctl bluez bluez-utils blueman network-manager-applet gvfs thunar-archive-plugin file-roller starship papirus-icon-theme ttf-jetbrains-mono-nerd noto-fonts-emoji lxappearance xfce4-settings nwg-look-bin sddm-git sddm-sugar-candy-git
+
+paru -S catppuccin-gtk-theme-mocha zsh fzf-git lazygit-git nvm neovim-git cascadia-code-git brave-bin --noconfirm
+
+sudo pacman -S ripgrep exa bat tmux nodejs npm github-cli --noconfirm
+
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+curl -sS https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | bash
+curl -fsSL https://bun.sh/install | bash
+LV_BRANCH='release-1.3/neovim-0.9' bash <(curl -s https://raw.githubusercontent.com/LunarVim/LunarVim/release-1.3/neovim-0.9/utils/installer/install.sh)
+curl -L https://foundry.paradigm.xyz | bash
+chsh -s /usr/bin/zsh
+
+# FZF bindings
+source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/completion.zsh
+# Enable the sddm login manager service
+sudo systemctl enable sddm
+
+paru -R --noconfirm xdg-desktop-portal-gnome xdg-desktop-portal-gtk
+
+
+echo -e "Copying config files..."
+
+# copy the HyprV directory
+cp -R HyprV ~/.config/
+
+# link up the config files
+
+cp ~/.config/HyprV/hypr/* ~/.config/hypr/
+cp -R ~/.config/HyprV/alacritty/ ~/.config/
+cp -R ~/.config/HyprV/mako/ ~/.config/
+cp -R ~/.config/HyprV/swaylock/ ~/.config/
+cp -R ~/.config/HyprV/waybar/ ~/.config
+cp -R ~/.config/HyprV/wlogout ~/.config/
+cp -R ~/.config/HyprV/wofi/ ~/.config/
+cp -R ~/.config/HyprV/bat/ ~/.config/
+cp -R ~/.config/HyprV/starship/starship.toml ~/.config/
+cp -R ~/.config/HyprV/lvim/ ~/.config/
+cp -R ~/.config/HyprV/.oh-my-zsh/ ~/
+cp -R ~/.config/HyprV/zsh/ ~/
+cp -R ~/.config/HyprV/lvim/ ~/
+cp -R ~/.config/HyprV/.tmux/ ~/
+cp -R ~/.config/HyprV/.zsh/ ~/
+cp ~/.config/HyprV/.tmux.conf ~/
+cp ~/.config/HyprV/.gitconfig ~/
+cp ~/.config/HyprV/.zshrc ~/
+cp ~/.config/HyprV/.zshenv ~/
+cp ~/.config/HyprV/.zshrc.pre-oh-my-zsh ~/
+
+# add the Nvidia env file to the config (if needed)
+echo -e "\nsource = ~/.config/hypr/env_var_nvidia.conf" >> ~/.config/hypr/hyprland.conf
+
+
+# Copy the SDDM theme
+echo -e "Setting up the login screen."
+sudo cp -R Extras/sdt /usr/share/sddm/themes/
+sudo chown -R $USER:$USER /usr/share/sddm/themes/sdt
+sudo mkdir /etc/sddm.conf.d
+echo -e "[Theme]\nCurrent=sdt" | sudo tee -a /etc/sddm.conf.d/10-theme.conf
+WLDIR=/usr/share/wayland-sessions
+if [ -d "$WLDIR" ]; then
+    echo -e "$WLDIR found"
+else
+    echo -e "$WLDIR NOT found, creating..."
+    sudo mkdir $WLDIR
+fi 
+
+# stage the .desktop file
+sudo cp Extras/hyprland.desktop /usr/share/wayland-sessions/
+
+# setup the first look and feel as dark
+xfconf-query -c xsettings -p /Net/ThemeName -s "Catppuccin-Mocha"
+xfconf-query -c xsettings -p /Net/IconThemeName -s "Papirus-Dark"
+gsettings set org.gnome.desktop.interface gtk-theme "Catppuccin-Mocha"
+gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
+cp -f ~/.config/HyprV/backgrounds/neon.png /usr/share/sddm/themes/sdt/wallpaper.jpg
+
+
+
+### Script is done ###
+echo -e "Script had completed! Please reboot"
