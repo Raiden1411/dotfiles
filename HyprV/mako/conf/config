@@ -10,7 +10,7 @@ on-touch=dismiss
 #on-notify=exec mpv /usr/share/sounds/freedesktop/stereo/message.oga
 
 # STYLE OPTIONS
-font=Cascadia Code 14
+font=Cascadia Code
 width=300
 height=100
 margin=10
@@ -30,8 +30,8 @@ max-visible=5
 layer=overlay
 anchor=center
 
-background-color=#1e1e2e
-text-color=#d9e0ee
+background-color=#e7e7ec
+text-color=#1e1e2e
 border-color=#313244
 progress-color=over #89b4fa
 
