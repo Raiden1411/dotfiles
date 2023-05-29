@@ -30,3 +30,4 @@ set FOUNDRY_BIN $HOME/.foundry/bin
 fish_add_path $FOUNDRY_BIN
 
 eval (starship init fish)
+pokemon-colorscripts -s -n "lugia"

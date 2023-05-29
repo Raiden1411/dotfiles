@@ -10,76 +10,81 @@
 # Define the software that would be inbstalled 
 #Need some prep work
 prep_stage=(
-    qt5-wayland 
+    qt5-wayland
     qt5ct
-    qt6-wayland 
-    qt6ct 
-    gtk3 
-    polkit-gnome 
-    pipewire 
-    wireplumber 
-    jq 
-    gcc12 
-    wl-clipboard 
-    cliphist 
-    python-requests 
+    qt5-quickcontrols
+    qt5-imageformats
+    qt6-wayland
+    qt6ct
+    gtk3
+    polkit-gnome
+    pipewire
+    wireplumber
+    jq
+    gcc12
+    wl-clipboard
+    cliphist
+    python-requests
     pacman-contrib
 )
 
 #software for nvidia GPU only
 nvidia_stage=(
-    linux-headers 
-    nvidia-dkms 
-    nvidia-settings 
-    libva 
+    linux-headers
+    nvidia-dkms
+    nvidia-settings
+    libva
     libva-nvidia-driver-git
 )
 
 #the main packages
 install_stage=(
-    kitty 
-    mako 
-    waybar-hyprland 
-    swww 
-    swaylock-effects 
-    wofi 
-    wlogout 
-    xdg-desktop-portal-hyprland 
-    swappy 
-    grim 
-    slurp 
-    thunar 
+    kitty
+    mako
+    waybar-hyprland
+    swww
+    swaylock-effects
+    wofi
+    wlogout
+    xdg-desktop-portal-hyprland
+    swappy
+    grim
+    slurp
+    thunar
     btop
     firefox
     mpv
-    pamixer 
-    pavucontrol 
-    brightnessctl 
-    bluez 
-    bluez-utils 
-    blueman 
-    network-manager-applet 
-    gvfs 
-    thunar-archive-plugin 
+    pamixer
+    pavucontrol
+    brightnessctl
+    bluez
+    bluez-utils
+    blueman
+    network-manager-applet
+    gvfs
+    thunar-archive-plugin
     file-roller
-    starship 
-    papirus-icon-theme 
-    ttf-jetbrains-mono-nerd 
-    noto-fonts-emoji 
-    lxappearance 
+    starship
+    papirus-icon-theme
+    ttf-jetbrains-mono-nerd
+    noto-fonts-emoji
+    lxappearance
     xfce4-settings
     nwg-look-bin
-    sddm-git 
+    sddm-git
     sddm-sugar-candy-git
     catppuccin-gtk-theme-mocha
     catppuccin-gtk-theme-latte
+    bibata-cursor-theme
+    tela-circle-icon-theme-dracula-git
     fish
     fzf-git
     lazygit-git
-    nvm
     neovim-git
     brave-bin
     vscodium
+    neofetch
+    pokemon-colorscripts-git
 )
 
 for str in ${myArray[@]}; do
@@ -261,7 +266,7 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
     done
 
     echo -e "$CNT - Installing remaining packages..."
-    sudo pacman -S ripgrep exa bat tmux github-cli otf-cascadia-code ttf-cascadia-code --noconfirm
+    sudo pacman -S ripgrep exa bat tmux github-cli otf-cascadia-code ttf-cascadia-code nodejs npm --noconfirm
 
     # Enable the sddm login manager service
     echo -e "$CNT - Enabling the SDDM Service..."
@@ -282,18 +287,6 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     cp -R HyprV ~/.config/
     cp postinstall.sh ~/Desktop/
 
-    #set the measuring unit
-    echo -e "$CNT - Attempring to set mesuring unit..."
-    if locale -a | grep -q ^en_US; then
-        echo -e "$COK - Setting mesuring system to imperial..."
-        ln -sf ~/.config/HyprV/waybar/conf/mesu-imp.jsonc ~/.config/HyprV/waybar/conf/mesu.jsonc
-        sed -i 's/SET_MESU=""/SET_MESU="I"/' ~/.config/HyprV/hyprv.conf
-    else
-        echo -e "$COK - Setting mesuring system to metric..."
-        sed -i 's/SET_MESU=""/SET_MESU="M"/' ~/.config/HyprV/hyprv.conf
-        ln -sf ~/.config/HyprV/waybar/conf/mesu-met.jsonc ~/.config/HyprV/waybar/conf/mesu.jsonc
-    fi
-
     # Setup each appliaction
     # check for existing config folders and backup 
     for DIR in kitty hypr mako swaylock waybar wlogout wofi 
@@ -309,23 +302,44 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
         mkdir -p $DIRPATH &>> $INSTLOG
     done
 
-    # link up the config files
+    # copy the files
     echo -e "$CNT - Setting up the new config..." 
     cp ~/.config/HyprV/hypr/* ~/.config/hypr/
-    ln -sf ~/.config/HyprV/kitty/kitty.conf ~/.config/kitty/kitty.conf
-    ln -sf ~/.config/HyprV/mako/conf/config-dark ~/.config/mako/config
-    ln -sf ~/.config/HyprV/swaylock/config ~/.config/swaylock/config
-    ln -sf ~/.config/HyprV/waybar/conf/v4-config.jsonc ~/.config/waybar/config.jsonc
-    ln -sf ~/.config/HyprV/waybar/style/v4-style-dark.css ~/.config/waybar/style.css
-    ln -sf ~/.config/HyprV/wlogout/layout ~/.config/wlogout/layout
-    ln -sf ~/.config/HyprV/wofi/config ~/.config/wofi/config
-    ln -sf ~/.config/HyprV/wofi/style/v4-style-dark.css ~/.config/wofi/style.css
+    cp -R ~/.config/HyprV/backgrounds ~/.config/
+    cp -R ~/.config/HyprV/kitty ~/.config/
+    cp -R ~/.config/HyprV/mako ~/.config/
+    cp -R  ~/.config/HyprV/swaylock ~/.config
+    cp -R ~/.config/HyprV/wlogout ~/.config/
+    cp -R ~/.config/HyprV/wofi ~/.config/
+    cp -R ~/.config/HyprV/waybar/ ~/.config/
     cp -R ~/.config/HyprV/bat/ ~/.config/
     cp -R ~/.config/HyprV/fish/ ~/.config/
+    cp -R ~/.config/HyprV/qt5ct/ ~/.config/
+    cp -R ~/.config/HyprV/gtk-3.0/ ~/.config/
+    cp -R ~/.config/HyprV/xsettingsd/ ~/.config/
     cp -R ~/.config/HyprV/.tmux/ ~/
     cp ~/.config/HyprV/.tmux.conf ~/
     cp ~/.config/HyprV/.gitconfig ~/
 
+    # Set initial defaults
+    #set the waybar theme
+    ln -sf ~/.config/waybar/style/style-dark.css ~/.config/waybar/style.css
+
+    #set the wofi theme
+    ln -sf ~/.config/wofi/style/style-dark.css ~/.config/wofi/style.css
+    
+    #set the mako theme
+    ln -sf ~/.config/mako/conf/config-dark ~/.config/mako/config
+
+    #set the kitty theme
+    ln -sf ~/.config/kitty/themes/Mocha.conf ~/.config/kitty/themes/theme.conf
+
+    # setup tmux
+    git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm/
+    # Setup AstroNvim
+    git clone --depth 1 https://github.com/AstroNvim/AstroNvim ~/.config/nvim
+nvim
+    cp -R ~/config/HyprV/nvim/user ~/.config/nvim/lua/
 
     # add the Nvidia env file to the config (if needed)
     if [[ "$ISNVIDIA" == true ]]; then
@@ -351,10 +365,14 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
 
     # setup the first look and feel as dark
     xfconf-query -c xsettings -p /Net/ThemeName -s "Catppuccin-Mocha-Standart-Mauve-Dark"
-    xfconf-query -c xsettings -p /Net/IconThemeName -s "Papirus-Dark"
+    xfconf-query -c xsettings -p /Net/IconThemeName -s "Tela circle dracula dark"
     gsettings set org.gnome.desktop.interface gtk-theme "Catppuccin-Mocha-Standart-Mauve-Dark"
-    gsettings set org.gnome.desktop.interface icon-theme "Papirus-Dark"
-    cp -f ~/.config/HyprV/backgrounds/v4-background-dark.jpg /usr/share/sddm/themes/sdt/wallpaper.jpg
+    gsettings set org.gnome.desktop.interface icon-theme "Tela circle dracula dark"
+    gsettings set org.gnome.desktop.interface cursor-theme "Bibata Modern Ice"
+
+    cp -f ~/.config/backgrounds/background-dark.jpg /usr/share/sddm/themes/sdt/wallpaper.jpg
+
+
 fi
 
 ### Install the starship shell ###
