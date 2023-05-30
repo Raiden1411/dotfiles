@@ -6,13 +6,12 @@ $directory\
 [](fg:#E0B0FF bg:#CF9FFF)\
 $git_branch\
 $git_status\
-[](fg:#CF9FFF bg:#BF40BF)\
+[](fg:#CF9FFF bg:#CF9FFF)\
 $nodejs\
 $rust\
 $golang\
-[](fg:#BF40BF bg:#800080)\
+[](fg:#CF9FFF)\
 $time\
-[ ](fg:#800080)\
 \n$character"""
 
 [directory]
@@ -39,24 +38,24 @@ format = '[[($all_status$ahead_behind )](fg:#AA336A bg:#CF9FFF)]($style)'
 
 [nodejs]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "bg:#483248"
+format = '[[ $symbol ($version) ](fg:#483248 bg:#CF9FFF)]($style)'
 
 [rust]
 symbol = ""
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "bg:#483248"
+format = '[[ $symbol ($version) ](fg:#483248 bg:#CF9FFF)]($style)'
 
 [golang]
 symbol = "ﳑ"
-style = "bg:#212736"
-format = '[[ $symbol ($version) ](fg:#769ff0 bg:#212736)]($style)'
+style = "bg:#483248"
+format = '[[ $symbol ($version) ](fg:#483248 bg:#CF9FFF)]($style)'
 
 [time]
 disabled = true
-time_format = "%R" # Hour:Minute Format
+time_format = "%R"                                      # Hour:Minute Format
 style = "bg:#1d2230"
-format = '[[  $time ](fg:#a0a9cb bg:#1d2230)]($style)'
+format = '[[  $time ](fg:#a0a9cb bg:#CF9FFF)]($style)'
 
 [docker_context]
 symbol = " "
@@ -90,4 +89,3 @@ disabled = false
 
 [git_metrics]
 disabled = false
-
