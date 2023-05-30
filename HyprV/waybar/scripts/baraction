@@ -1,18 +1,18 @@
-#!/bin/bash
+#!/bin/fish
 
 # Check which waybar theme is set
-THEMEIS=$(readlink -f ~/.config/waybar/style.css | cut -d '-' -f2 | cut -d '.' -f1)
+set THEMEIS (readlink -f ~/.config/waybar/style.css | cut -d '-' -f2 | cut -d '.' -f1)
 
 #if the theme is not dark then we need to switch to it
-if [[ $THEMEIS == "light" ]]; then
-    SWITCHTO="-dark"
-    MODESTR="Dark"
-    CAT="Mocha"
+if [ $THEMEIS = "light" ]
+    set SWITCHTO "-dark"
+    set MODESTR "Dark"
+    set CAT "Mocha"
 else
-    SWITCHTO="-light"
-    MODESTR="Light"
-    CAT="Latte"
-fi
+    set SWITCHTO "-light"
+    set MODESTR "Light"
+    set CAT "Latte"
+end
 
 #show a message
 notify-send -h string:x-canonical-private-synchronous:sys-notify -u low "switching to $MODESTR"
@@ -31,11 +31,14 @@ ln -sf ~/.config/kitty/themes/$CAT.conf ~/.config/kitty/themes/theme.conf
 killall -SIGUSR1 kitty
 
 #set the qt5ct theme
-sed -i "/^color_scheme_path=/c\color_scheme_path=~/.config/qt5ct/colors/Catppuccin-${CAT}.conf" ~/.config/qt5ct/qt5ct.conf
+sed -i "/^color_scheme_path=/c\color_scheme_path=~/.config/qt5ct/colors/Catppuccin-$CAT.conf" ~/.config/qt5ct/qt5ct.conf
 
 #set the vscode theme
-sed -i "/workbench.colorTheme/c \    \"workbench.colorTheme\": \"Catppuccin ${CAT}\"," ~/.config/VSCodium/User/settings.json
-sed -i "/workbench.iconTheme/c \    \"workbench.iconTheme\": \"catppuccin-${(echo CAT) | tr '[:upper:]' '[:lower:]'}\"," ~/.config/VSCodium/User/settings.json
+sed -i "/workbench.colorTheme/c \    \"workbench.colorTheme\": \"Catppuccin $CAT\"," ~/.config/VSCodium/User/settings.json
+sed -i "/workbench.iconTheme/c \    \"workbench.iconTheme\": \"catppuccin-"(echo $CAT | tr '[:upper:]' '[:lower:]')\","" ~/.config/VSCodium/User/settings.json
+
+# #set the fish theme
+# sed -i "/fish_config theme save /c \echo -e \"y\" | fish_config theme save \"Catppuccin ${CAT}\" | source" ~/.config/fish/config.fish
 
 #set the xfce and GTK theme
 gsettings set org.gnome.desktop.interface gtk-theme "Catppuccin-$CAT-Standard-Mauve-$MODESTR"
