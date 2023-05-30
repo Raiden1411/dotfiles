@@ -9,7 +9,8 @@
     "modules-left": [
         "custom/power_btn",
         "custom/lock_screen",
-        "wlr/workspaces"
+        "wlr/workspaces",
+        "hyprland/window"
     ],
     "modules-center": [
         "idle_inhibitor",
@@ -25,6 +26,21 @@
         "temperature",
         "custom/light_dark"
     ],
+
+    "hyprland/window": {
+        "format": "{}",
+        "max-length": 50,
+        "separate-outputs": true,
+        "rewrite": {
+            "": "\uf015  ",
+            "(.*) - Visual Studio Code": "\uf121  $1",
+            "(.*) - Brave": "\uf268  $1",
+            "xterm-kitty - (.*)": "\uf120  $1", 
+            "(.*) - VIM": "\uf036  $1",
+            "Telegram (.*)": "\uf2c6  $1",       
+            "/(.*)": "\uf07b  /$1"
+        }
+    },
 
     "idle_inhibitor": {
         "format": "{icon}",
