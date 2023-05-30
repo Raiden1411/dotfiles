@@ -35,6 +35,7 @@ sed -i "/^color_scheme_path=/c\color_scheme_path=~/.config/qt5ct/colors/Catppucc
 
 #set the vscode theme
 sed -i "/workbench.colorTheme/c \    \"workbench.colorTheme\": \"Catppuccin ${CAT}\"," ~/.config/VSCodium/User/settings.json
+sed -i "/workbench.iconTheme/c \    \"workbench.iconTheme\": \"catppuccin-${(echo CAT) | tr '[:upper:]' '[:lower:]'}\"," ~/.config/VSCodium/User/settings.json
 
 #set the xfce and GTK theme
 gsettings set org.gnome.desktop.interface gtk-theme "Catppuccin-$CAT-Standard-Mauve-$MODESTR"

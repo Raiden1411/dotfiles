@@ -1,4 +1,4 @@
-set -gx EDITOR lvim
+set -gx EDITOR nvim
 
 set -gx XDG_DATA_HOME $HOME/.local/share
 set -gx XDG_CONFIG_HOME $HOME/.config
