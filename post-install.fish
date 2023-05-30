@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/fish
 
 # Install Bun
 curl -fsSL https://bun.sh/install | bash
@@ -13,3 +13,5 @@ fish_config theme save "Catppuccin Mocha"
 
 # Install pnpm
 bun add -g pnpm
+
+cp  ~/.config/HyprV/VSCodium/User/settings.json ~/.config/VSCodium/User/settings.json

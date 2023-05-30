@@ -85,6 +85,8 @@ install_stage=(
     vscodium
     neofetch
     pokemon-colorscripts-git
+    termusic
+    cava
 )
 
 for str in ${myArray[@]}; do
@@ -266,7 +268,7 @@ if [[ $INST == "Y" || $INST == "y" ]]; then
     done
 
     echo -e "$CNT - Installing remaining packages..."
-    sudo pacman -S ripgrep exa bat tmux github-cli otf-cascadia-code ttf-cascadia-code nodejs npm --noconfirm
+    sudo pacman -S direnv ripgrep exa bat tmux github-cli otf-cascadia-code ttf-cascadia-code nodejs npm --noconfirm
 
     # Enable the sddm login manager service
     echo -e "$CNT - Enabling the SDDM Service..."
@@ -317,6 +319,7 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     cp -R ~/.config/HyprV/qt5ct/ ~/.config/
     cp -R ~/.config/HyprV/gtk-3.0/ ~/.config/
     cp -R ~/.config/HyprV/xsettingsd/ ~/.config/
+    cp -R ~/.config/HyprV/direnv/ ~/.config/
     cp -R ~/.config/HyprV/.tmux/ ~/
     cp ~/.config/HyprV/.tmux.conf ~/
     cp ~/.config/HyprV/.gitconfig ~/
