@@ -30,6 +30,8 @@ ln -sf ~/.config/mako/conf/config$SWITCHTO ~/.config/mako/config
 ln -sf ~/.config/kitty/themes/$CAT.conf ~/.config/kitty/themes/theme.conf
 killall -SIGUSR1 kitty
 
+setscheme "Catppuccin $CAT"
+
 #set the qt5ct theme
 sed -i "/^color_scheme_path=/c\color_scheme_path=~/.config/qt5ct/colors/Catppuccin-$CAT.conf" ~/.config/qt5ct/qt5ct.conf
 
@@ -37,8 +39,9 @@ sed -i "/^color_scheme_path=/c\color_scheme_path=~/.config/qt5ct/colors/Catppucc
 sed -i "/workbench.colorTheme/c \    \"workbench.colorTheme\": \"Catppuccin $CAT\"," ~/.config/VSCodium/User/settings.json
 sed -i "/workbench.iconTheme/c \    \"workbench.iconTheme\": \"catppuccin-"(echo $CAT | tr '[:upper:]' '[:lower:]')\","" ~/.config/VSCodium/User/settings.json
 
-# #set the fish theme
-# sed -i "/fish_config theme save /c \echo -e \"y\" | fish_config theme save \"Catppuccin ${CAT}\" | source" ~/.config/fish/config.fish
+#set the neovim theme
+nvim --server /tmp/nvim.pipe --remote-send ":set background="(echo $MODESTR | tr '[:upper:]' '[:lower:]')"<cr>"
+sed -i "/vim.g.catppuccin_flavour/c \                vim.g.catppuccin_flavour = "\"(echo $CAT | tr '[:upper:]' '[:lower:]')\""" ~/.config/nvim/lua/user/init.lua
 
 #set the xfce and GTK theme
 gsettings set org.gnome.desktop.interface gtk-theme "Catppuccin-$CAT-Standard-Mauve-$MODESTR"

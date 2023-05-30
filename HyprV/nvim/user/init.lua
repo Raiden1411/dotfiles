@@ -26,38 +26,6 @@ local config = {
 	-- Set colorscheme to use
 	colorscheme = "catppuccin",
 	-- Add highlight groups in any theme
-	highlights = {
-		-- The `init` table affects all themes
-		-- init = {
-		--
-		-- }
-
-		-- NvChad-esq Telescope Theme for Catppuccin
-		catppuccin = function()
-			-- Pull in the catppuccin mocha colors
-			local mocha = require("catppuccin.palettes").get_palette("mocha")
-			local fg, bg = mocha.text, mocha.base
-			local bg_alt = mocha.mantle
-			local mauve = mocha.mauve
-			local green = mocha.green
-
-			-- return a table of highlights for telescope based on colors gotten from highlight groups
-			return {
-				TelescopeBorder = { fg = bg_alt, bg = bg },
-				TelescopeNormal = { bg = bg },
-				TelescopePreviewBorder = { fg = bg, bg = bg },
-				TelescopePreviewNormal = { bg = bg },
-				TelescopePreviewTitle = { fg = bg, bg = mauve },
-				TelescopePromptBorder = { fg = bg_alt, bg = bg_alt },
-				TelescopePromptNormal = { fg = fg, bg = bg_alt },
-				TelescopePromptPrefix = { fg = green, bg = bg_alt },
-				TelescopePromptTitle = { fg = bg, bg = green },
-				TelescopeResultsBorder = { fg = bg, bg = bg },
-				TelescopeResultsNormal = { bg = bg },
-				TelescopeResultsTitle = { fg = bg, bg = bg },
-			}
-		end,
-	},
 	-- set vim options here (vim.<first_key>.<second_key> = value)
 	options = {
 		opt = {
@@ -275,16 +243,35 @@ local config = {
 			as = "catppuccin",
 			config = function()
 				-- latte, frappe, macchiato, mocha
-				vim.g.catppuccin_flavour = "mocha"
+                vim.g.catppuccin_flavour = "mocha"
 				-- local colors = require("catppuccin.palettes").get_palette()
 				require("catppuccin").setup({
-					transparent_background = true,
-					term_colors = true,
+					transparent_background = false,
+					term_colors = false,
 					styles = {
 						comments = { "italic" },
 						functions = { "italic", "bold" },
 						keywords = { "italic" },
 					},
+					background = { -- :h background
+						light = "latte",
+						dark = "mocha",
+					},
+					show_end_of_buffer = false, -- show the '~' characters after the end of buffers
+					dim_inactive = {
+						enabled = false,
+						shade = "dark",
+						percentage = 0.15,
+					},
+					integrations = {
+						cmp = true,
+						gitsigns = true,
+						nvimtree = true,
+						telescope = true,
+						notify = false,
+						mini = false,
+						-- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
+					}
 				})
 			end,
 		},

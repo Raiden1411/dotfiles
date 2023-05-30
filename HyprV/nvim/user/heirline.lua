@@ -8,7 +8,6 @@
 local lsp_client_names = function(opts)
 	local status = require("astronvim.utils.status")
 	local extend_tbl = require("astronvim.utils").extend_tbl
-	local mocha = require("catppuccin.palettes").get_palette("mocha")
 	local is_copilot = false
 
 	opts = extend_tbl({ expand_null_ls = true, truncate = 0.25 }, opts)
@@ -49,19 +48,16 @@ end
 
 local statusline_config = function(_, opts)
 	local status = require("astronvim.utils.status")
-	local mocha = require("catppuccin.palettes").get_palette("mocha")
 	opts.statusline = {
 		-- statusline
 		hl = { fg = "fg", bg = "bg" },
 		status.component.mode({
-			hl = { fg = mocha.surface0 },
 			mode_text = { icon = { kind = "VimIcon", padding = { right = 1, left = 1 } } },
 			surround = {
 				separator = "left",
 				color = function()
 					return {
 						main = status.hl.mode_bg(),
-						right = mocha.surface0,
 					}
 				end,
 			},
@@ -71,14 +67,9 @@ local statusline_config = function(_, opts)
 		status.component.git_branch({
 			surround = {
 				separator = "left",
-				color = {
-					main = mocha.surface0,
-					fg = mocha.green,
-				},
 				condition = status.condition.is_git_repo,
 				padding = { left = 1 },
 			},
-			hl = { fg = mocha.rosewater },
 			padding = { right = 1 },
 		}),
 		status.component.git_diff({
@@ -91,9 +82,6 @@ local statusline_config = function(_, opts)
 		}),
 		status.component.builder({
 			provider = lsp_client_names({ expand_null_ls = true, truncate = 0.25 }),
-			hl = {
-				fg = mocha.overlay2,
-			},
 			surround = { separator = "right" },
 		}),
 		status.component.file_info({
@@ -114,7 +102,6 @@ local statusline_config = function(_, opts)
 				end,
 				padding = { left = 1 },
 			},
-			hl = { fg = mocha.surface0 },
 			ruler = { padding = { left = 1, right = 1 } },
 			scrollbar = false,
 			percentage = false,
