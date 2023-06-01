@@ -45,6 +45,7 @@ sed -i "/vim.g.catppuccin_flavour/c \                vim.g.catppuccin_flavour = 
 
 #set the xfce and GTK theme
 gsettings set org.gnome.desktop.interface gtk-theme "Catppuccin-$CAT-Standard-Mauve-$MODESTR"
+xfconf-query -c xsettings -p /Net/ThemeName -s "Catppuccin-$CAT-Standard-Mauve-$MODESTR"
 
 #update the sddm image
 cp -f ~/.config/backgrounds/background$SWITCHTO.jpg /usr/share/sddm/themes/sdt/wallpaper.jpg
