@@ -85,8 +85,9 @@ install_stage=(
     vscodium
     neofetch
     pokemon-colorscripts-git
-    termusic
     cava
+    spotify-player
+    yt-dlp
 )
 
 for str in ${myArray[@]}; do
@@ -327,6 +328,7 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     cp -R ~/.config/HyprV/.tmux/ ~/
     cp ~/.config/HyprV/.tmux.conf ~/
     cp ~/.config/HyprV/.gitconfig ~/
+    cp Extras/starship.toml ~/.config/
 
     # Set initial defaults
     #set the waybar theme
@@ -382,15 +384,9 @@ nvim
 
     cp -f ~/.config/backgrounds/background-dark.jpg /usr/share/sddm/themes/sdt/wallpaper.jpg
 
+    git clone https://github.com/semimqmo/sekiro_grub_theme && cd sekiro_grub_theme
+    sudo ./install.sh
 
-fi
-
-### Install the starship shell ###
-read -rep $'[\e[1;33mACTION\e[0m] - Would you like to activate the starship shell? (y,n) ' STAR
-if [[ $STAR == "Y" || $STAR == "y" ]]; then
-    # install the starship shell
-    echo -e "$CNT - copying starship config file to ~/.config ..."
-    cp Extras/starship.toml ~/.config/
     chsh -s fish
 fi
 
