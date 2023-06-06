@@ -320,6 +320,10 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
     cp -R ~/.config/HyprV/gtk-3.0/ ~/.config/
     cp -R ~/.config/HyprV/xsettingsd/ ~/.config/
     cp -R ~/.config/HyprV/direnv/ ~/.config/
+    cp -R ~/.config/HyprV/neofetch/ ~/.config/
+    cp -R ~/.config/HyprV/cava/ ~/.config/
+    cp -R ~/.config/HyprV/spotify-player/ ~/.config/
+    cp -R ~/.config/HyprV/nwg-look/ ~/.config/
     cp -R ~/.config/HyprV/.tmux/ ~/
     cp ~/.config/HyprV/.tmux.conf ~/
     cp ~/.config/HyprV/.gitconfig ~/
@@ -336,6 +340,9 @@ if [[ $CFG == "Y" || $CFG == "y" ]]; then
 
     #set the kitty theme
     ln -sf ~/.config/kitty/themes/Mocha.conf ~/.config/kitty/themes/theme.conf
+
+    #set the player theme
+    ln -sf ~/.config/spotify-player/Catppuccin Mocha.toml ~/.config/spotify-player/app.toml
 
     # setup tmux
     git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm/

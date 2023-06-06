@@ -26,6 +26,9 @@ ln -sf ~/.config/wofi/style/style$SWITCHTO.css ~/.config/wofi/style.css
 #set the mako theme
 ln -sf ~/.config/mako/conf/config$SWITCHTO ~/.config/mako/config
 
+#set the spotify theme player
+ln -sf ~/.config/spotify-player/Catppuccin\ $CAT.toml ~/.config/spotify-player/app.toml
+
 #set the kitty theme
 ln -sf ~/.config/kitty/themes/$CAT.conf ~/.config/kitty/themes/theme.conf
 killall -SIGUSR1 kitty

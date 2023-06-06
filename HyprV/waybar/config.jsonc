@@ -10,6 +10,7 @@
         "custom/power_btn",
         "custom/lock_screen",
         "wlr/workspaces",
+        "custom/cava-internal",
         "hyprland/window"
     ],
     "modules-center": [
@@ -18,10 +19,12 @@
         "custom/updates"
     ],
     "modules-right": [
+        "disk",
         "cpu",
         "memory",
         "pulseaudio",
         "pulseaudio#microphone",
+        "custom/spotify",
         "tray",
         "temperature",
         "custom/light_dark"
@@ -40,6 +43,17 @@
             "Telegram (.*)": "\uf2c6  $1",       
             "/(.*)": "\uf07b  /$1"
         }
+    },
+
+    "custom/cava-internal": {
+        "exec": "~/.config/waybar/scripts/exec_cava",
+        "tooltip": false
+    },
+
+    "custom/spotify": {
+        "on-click": "kitty --title spotify sh -c 'spotify_player'",
+        "tooltip": false,
+        "format": "  "
     },
 
     "idle_inhibitor": {
@@ -86,6 +100,14 @@
             "10": []
         }
     },
+
+    "disk": {
+        "interval": 30,
+        "format": " {used}",
+        "path": "/home/raiden/",
+        "tooltip": true,
+        "tooltip-format": "{used}/{total} => {path} {percentage_used}%",
+      },
 
     "cpu": {
         "interval": 10,

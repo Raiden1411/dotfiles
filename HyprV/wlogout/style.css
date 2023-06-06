@@ -21,14 +21,16 @@ button {
     animation: gradient_f 20s ease-in infinite;
 }
 
+
 button:focus {
 	background-color: #cba6f7;
-	background-size: 20%;
+	background-size: 16.6%;
 }
+
 
 button:hover#lock {
 	background-color: #f5c2e7;
-	background-size: 25%;
+	background-size: 16.6%;
 	margin-right : 30px;
 	margin-bottom : 30px;
 	border-radius: 20px;
@@ -38,7 +40,7 @@ button:hover#lock {
 
 button:hover#logout {
 	background-color: #f5c2e7;
-	background-size: 25%;
+	background-size: 16.6%;
 	margin-right : 30px;
 	margin-top : 30px;
 	border-radius: 20px;
@@ -48,7 +50,7 @@ button:hover#logout {
 
 button:hover#shutdown {
 	background-color: #f5c2e7;
-	background-size: 25%;
+	background-size: 16.6%;
 	margin-left : 20px;
 	margin-bottom : 30px;
 	border-radius: 20px;
@@ -58,13 +60,34 @@ button:hover#shutdown {
 
 button:hover#reboot {
 	background-color: #f5c2e7;
-	background-size: 25%;
+	background-size: 16.6%;
 	margin-left : 30px;
 	margin-top : 30px;
 	border-radius: 20px;
     animation: gradient_f 20s ease-in infinite;
 	transition: all 0.3s cubic-bezier(.55,0.0,.28,1.682);
 }
+
+button:hover#suspend {
+	background-color: #f5c2e7;
+	background-size: 16.6%;
+	margin-left : 20px;
+	margin-bottom : 30px;
+	border-radius: 20px;
+    animation: gradient_f 20s ease-in infinite;
+	transition: all 0.3s cubic-bezier(.55,0.0,.28,1.682);
+}
+
+button:hover#hibernate {
+	background-color: #f5c2e7;
+	background-size: 16.6%;
+	margin-left : 30px;
+	margin-top : 30px;
+	border-radius: 20px;
+    animation: gradient_f 20s ease-in infinite;
+	transition: all 0.3s cubic-bezier(.55,0.0,.28,1.682);
+}
+
 
 #lock {
     background-image: image(url("/usr/share/wlogout/icons/lock.png"), url("/usr/local/share/wlogout/icons/lock.png"));
@@ -78,10 +101,18 @@ button:hover#reboot {
 
 #shutdown {
     background-image: image(url("/usr/share/wlogout/icons/shutdown.png"), url("/usr/local/share/wlogout/icons/shutdown.png"));
-	border-top-right-radius: 50px;
 }
 
 #reboot {
     background-image: image(url("/usr/share/wlogout/icons/reboot.png"), url("/usr/local/share/wlogout/icons/reboot.png"));
+}
+
+#suspend {
+    background-image: image(url("/usr/share/wlogout/icons/suspend.png"), url("/usr/local/share/wlogout/icons/suspend.png"));
+	border-top-right-radius: 50px;
+}
+
+#hibernate {
+    background-image: image(url("/usr/share/wlogout/icons/hibernate.png"), url("/usr/local/share/wlogout/icons/hibernate.png"));
 	border-bottom-right-radius: 50px;
 }

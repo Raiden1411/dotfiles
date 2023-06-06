@@ -1,0 +1,23 @@
+[[themes]]
+name = "Catppuccin-latte"
+[themes.palette]
+background = "#EFF1F5"
+foreground = "#4C4F69"
+black = "#EFF1F5"
+blue = "#1E66F5"
+cyan = "#04A5E5"
+green = "#40A02B"
+magenta = "#8839EF"
+red = "#D20F39"
+white = "#4C4F69"
+yellow = "#DF8E1D"
+bright_black = "#EFF1F5"
+bright_blue = "#1E66F5"
+bright_cyan = "#04A5E5"
+bright_green = "#40A02B"
+bright_magenta = "#8839EF"
+bright_red = "#D20F39"
+bright_white = "#4C4F69"
+bright_yellow = "#DF8E1D"
+[themes.component_style]
+selection = { bg = { Rgb = { r = 204, g = 208, b = 218 } }, modifiers = ["Bold"] }

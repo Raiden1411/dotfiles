@@ -1,5 +1,3 @@
--- Load in the statusline config
-local statusline_config = require("user.heirline")
 -- Load in the headers
 local headers = require("user.headers")
 math.randomseed(os.time())
@@ -219,7 +217,6 @@ local config = {
 		-- Override Heirline Config
 		{
 			"rebelot/heirline.nvim",
-			opts = statusline_config,
 		},
 
 		----------------------------------------------------------------
@@ -254,9 +251,9 @@ local config = {
 						keywords = { "italic" },
 					},
 					background = { -- :h background
-						light = "latte",
-						dark = "mocha",
-					},
+					light = "latte",
+					dark = "mocha",
+				},
 					show_end_of_buffer = false, -- show the '~' characters after the end of buffers
 					dim_inactive = {
 						enabled = false,
